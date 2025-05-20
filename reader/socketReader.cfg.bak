@@ -1,0 +1,64 @@
+# socketReader config file
+
+
+# This section is where standard config stuff goes.
+[general]
+
+# Logging options
+# NOTE: Leave logfile blank for no logging.
+logfile = c:/wamp/www/hema_hl7/transmission.log
+# NOTE: possible log levels in ascending verbosity are: 
+#       critical, error, warning, prod, info, debug
+loglvl = critical
+
+# Here you state the connections you want to use. You need to provide a 
+# comma separated list here.
+# Example: useconnections = sockstreamin, fileout
+# useconnections = incoming_socket, outgoing_socket, incoming_file, outgoing_file
+
+useconnections =  incoming_socket
+
+[incoming_socket]
+queuename = socket-to-file
+# The connection type is defined by two options describing message transmission 
+# technique and transfer direction. 
+# Message transmission techniques are provided by the option transtech.
+# Possible message transmission techniques are: socket, file
+transtech = socket
+# Message transfer directions are provided by the option transdir. 
+# Possible transfer directions are: in, out
+transdir = in
+# State if this connection is used for HL7 communications
+# NOTE: This must be set to True if you wish to use the hl7prefix option. 
+usehl7 = True
+# Define if to use acknowledgement messages or not. Depending on the setting 
+# of the usehl7 option, HL7 or MLLP acks will be sent.
+useack = True
+# Give options for a socket connection
+# NOTE: Set createserversocket to True if you want socketReader to works as 
+#       socket server. Set it to False if you want socketReader to work as 
+#       a socket client.
+createserversocket = True
+# NOTE: When defining a socket client, ipaddr must be set to the remote 
+#       machine's IP address socketReader should connect to. When defining a 
+#       socket server, you may give the IP of any local TCP/IP network 
+#       interface. If you leave this blank, the local default NIC will be used. 
+ipaddr = 192.168.11.15
+# NOTE: In server mode, port describes the local port the server socket will 
+#       listen on. In client mode, socketReader will try to connect to port 
+#       on the remote machine. If empty, port defaults to 22222.
+port = 5100
+# MLLP special characters
+# NOTE: If you want to redefine these special characters, uncomment the
+#       three lines below. You need to provide Python syntax here, like:
+#       chr(<ascii table entry number for your desired char>) which can be 
+#       hexadecimal as shown below or decimal.  
+sob = chr(0x0B)
+eob = chr(0x1C)
+eod = chr(0x0D)
+# NOTE: The same would be achieved by: eod = chr(13) 
+# Debug options:
+# NOTE: This connector does not support any debug options. Whatever you state 
+#       here will be discarded. However, socketReader will exit with an error
+#       upon syntax errors.
+#debug = {}

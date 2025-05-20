@@ -1,0 +1,18 @@
+<?php
+	include("../handlers/_generics.php");
+	$con = new _init;
+
+	$cutoff = '2022-01-16';
+
+	$data = array();
+	$datares = $con->dbquery("SELECT enccode, SUBSTR(enccode,8,15) AS hmrno, date_format(a.dotime,'%m/%d/%Y %h:%i %a') as orderdate, `code`, `procedure`, primecarecode, serialno, patientname, physician, DATE_FORMAT(CONCAT(extractdate,' ',extractime),'%m/%d/%Y %h:%i %p') AS exdate, extractby, record_id as id, `status` as ostat, b.samplestatus, a.is_consolidated, a.dotime, CONCAT(extractdate,' ',extractime) as tstamp FROM lab_samples a left join options_samplestatus b on a.status = b.id;");
+	
+    while($row = $datares->fetch_array(MYSQLI_ASSOC)){
+
+        $data[] = array_map('utf8_encode',$row);
+
+	}
+	$results = ["sEcho" => 1,"iTotalRecords" => count($data),"iTotalDisplayRecords" => count($data),"aaData" => $data];
+	echo json_encode($results);
+
+?>

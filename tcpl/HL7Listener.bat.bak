@@ -1,0 +1,4 @@
+@ECHO OFF
+START c:/wamp/www/tcpl/HL7Listener.exe -Port 5100 -FilePath c:/wamp/www/inbound/in -NoACK
+START c:/wamp/www/tcpl/HL7Listener.exe -Port 5101 -FilePath c:/wamp/www/inbound/chem -NoACK
+EXIT 0
