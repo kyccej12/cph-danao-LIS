@@ -2,9 +2,9 @@
 	class myConnector {
 		private $_connection;
 		private static $_instance;
-		private $_host = "192.168.11.10";
+		private $_host = "localhost";
 		private $_username = "root";
-		private $_password = "r00t";
+		private $_password = "";
 		private $_database = "ppp_danao";
 		
 		public static function getInstance() {
